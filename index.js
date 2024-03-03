@@ -2,98 +2,82 @@ function getComputerChoice() {
   // Generate a random number from one to three
   let computerChoice = Math.floor(Math.random() * 3 + 1);
 
-  
-
-  //console.log(computerChoice);
   return computerChoice;
 }
 
-let rock = document.querySelector("#rock");
-let paper = document.querySelector("#paper");
-let scissors = document.querySelector("#scissors");
-let results = document.querySelector('#results');
-let body =document.querySelector('body');
-let playerSelection;
-let computerSelection = getComputerChoice();
+function getPlayerChoice() {
+  let playerChoice = prompt("Enter either Rock, Papers or Scissors ");
 
+  //Change it to lower case
+  playerChoice = playerChoice.toLowerCase(playerChoice);
 
-rock.addEventListener("click", () => {
-  const playerSelection = 1;
-  const result = playRound(playerSelection, computerSelection);
-  console.log(result);
-  results.textContent = playRound();
-  results.textContent = playGame();
-  body.appendChild(results);
-  
-});
+  switch (playerChoice) {
+    case "rock":
+      return 1;
 
-paper.addEventListener("click", () => {
-  const playerSelection = 2;
-  const result = playRound(playerSelection, computerSelection);
-  console.log(result);
-  
-});
+    case "papers":
+      return 2;
 
-scissors.addEventListener("click", () => {
-  const playerSelection = 3;
-  const result = playRound(playerSelection, computerSelection);
-  console.log(result);
-  
-});
+    case "scissors":
+      return 3;
+  }
+
+  return playerChoice;
+}
 
 function playRound(playerSelection, computerSelection) {
-  getComputerChoice();
-
   // Compare the strings from player and computer
   // Take the first input and assign them to a switch case to make the choice easier
+
   switch (playerSelection) {
     case 1:
       if (computerSelection === 1) {
+        draw++;
         return "Draw";
       } else if (computerSelection === 2) {
+        computerScore++;
         return "You Lose";
       } else {
+        playerScore++;
         return "You Win";
       }
     case 2:
       if (computerSelection === 2) {
+        draw++;
         return "Draw";
       } else if (computerSelection === 1) {
+        playerScore++;
         return "You win";
       } else {
+        computerScore++;
         return "You lose";
       }
     case 3:
       if (computerSelection === 3) {
+        draw++;
         return "Draw";
       } else if (computerSelection === 2) {
+        playerScore++;
         return "You win";
       } else {
+        computerScore++;
         return "You lose";
       }
   }
 }
 
+let playerScore = 0;
+let computerScore = 0;
+let draw = 0;
+
 function playGame() {
-  
-  //const computerSelection = getComputerChoice();
-
-  let playerScore = 0;
-  let computerScore = 0;
-  let draw= 0;
-
-  while(playerScore && computerScore < 5) {
-    playRound(playerSelection, computerSelection);
-
-    if (playRound() === "You lose") {
-      computerScore++;
-    } else if(playRound()==="You win") {
-      playerScore++;
-    }
-    else{
-        draw++;
-    }
+  let rounds = 5;
+  for (i = 0; i < rounds; i++) {
+    playRound(getPlayerChoice(), getComputerChoice());
   }
+  console.log("Player Score is:", playerScore);
+  console.log("Computer Score is", computerScore);
+  console.log("Draw Score is", draw);
+}
 
-  
-} 
+playGame();
