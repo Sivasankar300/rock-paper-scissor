@@ -6,23 +6,10 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-  let playerChoice = prompt("Enter either Rock, Papers or Scissors ");
+  
+  
 
-  //Change it to lower case
-  playerChoice = playerChoice.toLowerCase(playerChoice);
-
-  switch (playerChoice) {
-    case "rock":
-      return 1;
-
-    case "papers":
-      return 2;
-
-    case "scissors":
-      return 3;
-  }
-
-  return playerChoice;
+  
 }
 
 function playRound(playerSelection, computerSelection) {
