@@ -5,25 +5,54 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-function getPlayerChoice() {
-  let playerChoice = prompt("Enter either Rock, Papers or Scissors ");
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+let result = document.querySelector("#results");
+const body = document.querySelector("body");
+const reset = document.querySelector('#reset');
 
-  //Change it to lower case
-  playerChoice = playerChoice.toLowerCase(playerChoice);
-
-  switch (playerChoice) {
-    case "rock":
-      return 1;
-
-    case "papers":
-      return 2;
-
-    case "scissors":
-      return 3;
+rock.addEventListener("click", () => {
+  playRound(1, getComputerChoice());
+  let scores = `Player's score: ${playerScore} Computer's score ${computerScore} Draws: ${draw}`;
+  result.textContent = scores;
+  if(playerScore === 5){
+    result.textContent = "The winner is the Player!"
+  } else if(computerScore === 5){
+    result.textContent = "The winner is the Computer!"
   }
+});
 
-  return playerChoice;
-}
+paper.addEventListener("click", () => {
+  playRound(2, getComputerChoice());
+  
+  let scores = `Player's score: ${playerScore} Computer's score ${computerScore} Draws: ${draw}`;
+  result.textContent = scores;
+  if(playerScore === 5){
+    result.textContent = "The winner is the Player!"
+  } else if(computerScore === 5){
+    result.textContent = "The winner is the Computer!"
+
+   }
+});
+scissors.addEventListener("click", () => {
+  playRound(3, getComputerChoice());
+  let scores = `Player's score: ${playerScore} Computer's score ${computerScore} Draws: ${draw}`;
+  result.textContent = scores;
+  if(playerScore === 5){
+    result.textContent = "The winner is the Player!"
+  } else if(computerScore === 5){
+    result.textContent = "The winner is the Computer!"
+  
+
+  result.textContent = scores; }
+});
+
+reset.addEventListener('click',() => {
+  playerScore = 0;
+  computerScore = 0;
+  draw = 0;
+})
 
 function playRound(playerSelection, computerSelection) {
   // Compare the strings from player and computer
@@ -33,34 +62,45 @@ function playRound(playerSelection, computerSelection) {
     case 1:
       if (computerSelection === 1) {
         draw++;
+        round++;
         return "Draw";
       } else if (computerSelection === 2) {
         computerScore++;
+        round++;
+
         return "You Lose";
       } else {
         playerScore++;
+        round++;
         return "You Win";
       }
     case 2:
       if (computerSelection === 2) {
         draw++;
+        round++;
         return "Draw";
+        
       } else if (computerSelection === 1) {
         playerScore++;
+        round++;
         return "You win";
       } else {
         computerScore++;
+        round++;
         return "You lose";
       }
     case 3:
       if (computerSelection === 3) {
         draw++;
+        round++;
         return "Draw";
       } else if (computerSelection === 2) {
         playerScore++;
+        round++;
         return "You win";
       } else {
         computerScore++;
+        round++;
         return "You lose";
       }
   }
@@ -69,15 +109,4 @@ function playRound(playerSelection, computerSelection) {
 let playerScore = 0;
 let computerScore = 0;
 let draw = 0;
-
-function playGame() {
-  let rounds = 5;
-  for (i = 0; i < rounds; i++) {
-    playRound(getPlayerChoice(), getComputerChoice());
-  }
-  console.log("Player Score is:", playerScore);
-  console.log("Computer Score is", computerScore);
-  console.log("Draw Score is", draw);
-}
-
-playGame();
+let round = 0;
